@@ -45,9 +45,16 @@ export default function LoginPage() {
       return
     }
 
-    const { data: profile } = await supabase.from('user_profiles').select('role').eq('id', data.user.id).maybeSingle()
-    router.push(profile?.role === 'admin' ? '/admin/statistics' : '/chat')
-    router.refresh()
+    const { data: profile } = await supabase
+  .from('user_profiles')
+  .select('role')
+  .eq('id', data.user.id)
+  .maybeSingle()
+
+const userProfile = profile as { role?: string } | null
+
+router.push(userProfile?.role === 'admin' ? '/admin/statistics' : '/chat')
+router.refresh()
   }
 
   return (
