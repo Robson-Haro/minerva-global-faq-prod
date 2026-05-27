@@ -106,10 +106,10 @@ export default function AdminFaqsPage() {
     }
 
     setSaving(true)
-    const payload = { ...themeForm, created_by: userId }
-    const { error } = editingTheme
-      ? await supabase.from('themes').update(themeForm).eq('id', editingTheme)
-      : await supabase.from('themes').insert(payload)
+  const payload = { ...themeForm, created_by: userId }
+const { error } = editingTheme
+  ? await supabase.from('themes').update(themeForm as any).eq('id', editingTheme)
+  : await supabase.from('themes').insert(payload as any)
 
     setSaving(false)
     if (error) {
@@ -131,10 +131,10 @@ export default function AdminFaqsPage() {
     }
 
     setSaving(true)
-    const payload = { ...faqForm, theme_id: faqForm.theme_id || null, created_by: userId }
-    const { error } = editingFaq
-      ? await supabase.from('faqs').update({ ...faqForm, theme_id: faqForm.theme_id || null }).eq('id', editingFaq)
-      : await supabase.from('faqs').insert(payload)
+  const payload = { ...faqForm, theme_id: faqForm.theme_id || null, created_by: userId }
+const { error } = editingFaq
+  ? await supabase.from('faqs').update({ ...faqForm, theme_id: faqForm.theme_id || null } as any).eq('id', editingFaq)
+  : await supabase.from('faqs').insert(payload as any)
 
     setSaving(false)
     if (error) {
